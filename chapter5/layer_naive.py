@@ -29,3 +29,32 @@ class MulLayer:
         dy = dout * self.x
 
         return dx, dy
+
+
+class AddLayer:
+    """
+    加算レイヤ
+    """
+
+    def __init__(self):
+        pass
+
+    def forward(self, x, y):
+        """
+        順伝搬
+        :param x: 入力
+        :param y: 入力
+        :return:
+        """
+        out = x + y
+        return out
+
+    def backward(self, dout):
+        """
+        逆伝搬
+        :param dout:
+        :return:
+        """
+        dx = dout * 1
+        dy = dout * 1
+        return dx, dy
