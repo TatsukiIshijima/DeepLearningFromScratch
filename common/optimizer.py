@@ -75,7 +75,7 @@ class AdaGrad:
         for key in params.keys():
             self.h[key] += grads[key] * grads[key]
             # self.h[key] に 0　があった場合に 0 で除算しないよう 1e-7 を追加
-            params[key] -= self.lr * grads[key] * (np.sqrt(self.h[key] + 1e-7))
+            params[key] -= self.lr * grads[key] / (np.sqrt(self.h[key]) + 1e-7)
 
 
 class Adam:
@@ -104,7 +104,7 @@ class Adam:
                 self.v[key] = np.zeros_like(val)
 
         self.iter += 1
-        lr_t = self.lr * np.sqrt(1.0 - self.beta2 * self.iter) / (1.0 - self.beta1**self.iter)
+        lr_t = self.lr * np.sqrt(1.0 - self.beta2**self.iter) / (1.0 - self.beta1**self.iter)
 
         for key in params.keys():
             self.m[key] += (1 - self.beta1) * (grads[key] - self.m[key])
